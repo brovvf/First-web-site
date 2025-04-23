@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Прыгающая кнопка</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      height: 100vh;
+      background-color: #f0f0f0;
+      position: relative;
+    }
+    button {
+      position: absolute;
+      padding: 1rem 2rem;
+      font-size: 16px;
+      border: none;
+      background-color: #4CAF50;
+      color: white;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+  </style>
+</head>
+<body>
+  <button id="jumpBtn">Нажми меня</button>
+
+  <script>
+    const button = document.getElementById("jumpBtn");
+
+    function moveButton() {
+      const maxX = window.innerWidth - button.offsetWidth;
+      const maxY = window.innerHeight - button.offsetHeight;
+      const randomX = Math.random() * maxX;
+      const randomY = Math.random() * maxY;
+
+      button.style.left = `${randomX}px`;
+      button.style.top = `${randomY}px`;
+    }
+
+    button.addEventListener("click", moveButton);
+
+    // Первая случайная позиция
+    moveButton();
+  </script>
+</body>
+</html>
