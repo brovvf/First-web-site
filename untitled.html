@@ -4,35 +4,47 @@
   <meta charset="UTF-8">
   <title>Прыгающая кнопка</title>
   <style>
-    body {
+    html, body {
       margin: 0;
+      padding: 0;
       overflow: hidden;
-      height: 100vh;
+      height: 100%;
       background-color: #f0f0f0;
-      position: relative;
+      font-family: sans-serif;
     }
-    button {
+    .counter {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+    #jumpBtn {
       position: absolute;
-      padding: 1rem 2rem;
-      font-size: 16px;
+      width: 60px;
+      height: 60px;
+      background-color: red;
       border: none;
-      background-color: #4CAF50;
-      color: white;
-      border-radius: 10px;
+      border-radius: 50%;
       cursor: pointer;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
       transition: 0.2s;
     }
   </style>
 </head>
 <body>
-  <button id="jumpBtn">Нажми меня</button>
+  <div class="counter">Кликов: <span id="count">0</span></div>
+  <button id="jumpBtn"></button>
 
   <script>
     const button = document.getElementById("jumpBtn");
+    const countSpan = document.getElementById("count");
+    let count = 0;
 
     function moveButton() {
-      const maxX = window.innerWidth - button.offsetWidth;
-      const maxY = window.innerHeight - button.offsetHeight;
+      const margin = 10;
+      const maxX = window.innerWidth - button.offsetWidth - margin;
+      const maxY = window.innerHeight - button.offsetHeight - margin;
       const randomX = Math.random() * maxX;
       const randomY = Math.random() * maxY;
 
@@ -40,10 +52,15 @@
       button.style.top = `${randomY}px`;
     }
 
-    button.addEventListener("click", moveButton);
+    button.addEventListener("click", () => {
+      count++;
+      countSpan.textContent = count;
+      moveButton();
+    });
 
-    // Первая случайная позиция
-    moveButton();
+    // Переместить при старте
+    window.onload = moveButton;
   </script>
 </body>
 </html>
+
